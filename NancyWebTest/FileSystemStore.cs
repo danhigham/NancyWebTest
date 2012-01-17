@@ -4,7 +4,7 @@ namespace NancyWebTest
 {
     public class FileSystemStore : IImageStore
     {
-        public void Save(string filename, Stream filestream)
+        public void Save(string filename, Stream filestream, string contentType)
         {
             using (Stream file = File.OpenWrite(filename))
             {

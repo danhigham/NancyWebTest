@@ -11,7 +11,7 @@ namespace NancyWebTest
         }
 
         //  SELECT WHICH STORAGE OPTION TO INJECT BY ADJUSTING THIS CONSTANT             
-        const BuildConfiguration SelectedBuild = BuildConfiguration.Local;
+        const BuildConfiguration SelectedBuild = BuildConfiguration.Amazon;
 
         public override void Load()
         {

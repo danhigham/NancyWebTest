@@ -1,25 +1,27 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NancyWebTest/Main.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|Mixed Platforms" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NancyWebTest/IImageStore.cs">
     <Files>
       <File FileName="../../src/Nancy/src/Nancy.Hosting.Wcf/NancyWcfGenericService.cs" Line="45" Column="31" />
       <File FileName="../../src/Nancy/src/Nancy.Demo.Hosting.Wcf/Program.cs" Line="10" Column="87" />
       <File FileName="../../src/Nancy/src/Nancy.Demo.Hosting.Self/Program.cs" Line="6" Column="14" />
       <File FileName="../../src/Nancy/src/Nancy/HttpFile.cs" Line="41" Column="1" />
-      <File FileName="NancyWebTest/Main.cs" Line="3" Column="13" />
-      <File FileName="NancyWebTest/Modules/ImageUploadModule.cs" Line="35" Column="46" />
-      <File FileName="NancyWebTest/Views/index.html" Line="1" Column="1" />
-      <File FileName="NancyWebTest/app.config" Line="1" Column="1" />
+      <File FileName="NancyWebTest/Main.cs" Line="15" Column="59" />
+      <File FileName="NancyWebTest/S3Store.cs" Line="28" Column="84" />
+      <File FileName="NancyWebTest/IImageStore.cs" Line="11" Column="1" />
+      <File FileName="NancyWebTest/AzureStore.cs" Line="9" Column="80" />
+      <File FileName="NancyWebTest/FileSystemStore.cs" Line="7" Column="80" />
+      <File FileName="NancyWebTest/NinjectModule.cs" Line="14" Column="75" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="Nancy.Hosting.Self" expanded="True" />
           <Node name="NancyWebTest" expanded="True">
-            <Node name="References" selected="True" />
-            <Node name="Modules" expanded="True" />
+            <Node name="Modules" selected="True" />
             <Node name="Views" expanded="True" />
           </Node>
+          <Node name="Ninject" expanded="True" />
+          <Node name="StorageClient" expanded="True" />
         </State>
       </Pad>
     </Pads>

@@ -4,7 +4,7 @@ namespace NancyWebTest
 {
     public interface IImageStore
     {
-        void Save(string filename, Stream filestream);
+        void Save(string filename, Stream filestream, string contentType);
 
     }
 }
