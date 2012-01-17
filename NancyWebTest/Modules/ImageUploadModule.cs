@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing;
 
+
 namespace NancyWebTest
 {
 	public class ImageUploadModule : NancyModule
@@ -17,11 +18,16 @@ namespace NancyWebTest
 			
 			Post["/"] = parameters => {
 				
+                S3Uploader uploader = new S3Uploader();
+                
 				foreach(var file in Request.Files)
-				{					
-					var imgPath = "/tmp/temp-resized.png";
+				{				
+                    var originName = file.Name;
+					var imgPath = String.Format("{0}temp-resized.png", Path.GetTempPath());
 				   
 					ResizeImage(file.Value, imgPath, 300, 200, true);
+                    
+                    uploader.UploadToBucket("nancy-images", imgPath, originName, "image/png");
 				}
 				
 				return View["index", Request.Url];
