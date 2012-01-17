@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -43,26 +43,30 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureStore.cs" />
+    <Compile Include="FileSystemStore.cs" />
+    <Compile Include="IImageStore.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Modules\ImageUploadModule.cs" />
-    <Compile Include="Amazon\S3Uploader.cs" />
+    <Compile Include="NinjectModule.cs" />
+    <Compile Include="S3Store.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Modules\" />
-    <Folder Include="Views\" />
-    <Folder Include="Amazon\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="app.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\index.html">
+    <None Include="Views\index.sshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\azure-sdk-for-mono\microsoft-azure-api\StorageClient.csproj">
+      <Project>{C6F30C10-E1C2-4327-BB6B-3160B479CCA1}</Project>
+      <Name>StorageClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nancy\Nancy.csproj">
       <Project>{34576216-0DCA-4B0F-A0DC-9075E75A676F}</Project>
       <Name>Nancy</Name>
@@ -70,6 +74,10 @@
     <ProjectReference Include="..\Nancy.Hosting.Self\Nancy.Hosting.Self.csproj">
       <Project>{AA7F66EB-EC2C-47DE-855F-30B3E6EF2134}</Project>
       <Name>Nancy.Hosting.Self</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ninject\Ninject.csproj">
+      <Project>{ADF369E2-6B9E-4D56-9B82-D273AE41EC2D}</Project>
+      <Name>Ninject</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

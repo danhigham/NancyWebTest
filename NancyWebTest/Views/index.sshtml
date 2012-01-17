@@ -4,11 +4,14 @@
 	</head>
 	<body>
 		<h1>Image Uploader</h1>
-		
+		<p>
+            @Model.Time
+        </p>
 		<form method="post" enctype="multipart/form-data"> 
 			<input type="file" name="image-1" />
 			
 			<input type="submit" />
+            
 		</form>
 	</body>
 </html>
