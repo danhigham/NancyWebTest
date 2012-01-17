@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Nancy;
 using Ninject;
@@ -13,20 +14,21 @@ namespace NancyWebTest
         {
             Get["/"] = parameters =>
             {
-                return View["index", Request.Url];
+                return View["index.sshtml", new { Time = "" }];
             };
 
             Post["/"] = parameters =>
             {
-
+                Stopwatch sw = Stopwatch.StartNew();
                 foreach (var file in Request.Files)
                 {
                     var imgPath = "temp-resized.png";
 
                     ResizeImage(file.Value, imgPath, 300, 200, true);
                 }
+                sw.Stop();
 
-                return View["index", Request.Url];
+                return View["index.sshtml", new { Time = sw.ElapsedMilliseconds.ToString() + " milliseconds to crunch and store the image" }];
             };
         }
 
