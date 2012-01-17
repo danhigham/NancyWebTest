@@ -42,7 +42,6 @@
     <Compile Include="AzureStore.cs" />
     <Compile Include="FileSystemStore.cs" />
     <Compile Include="IImageStore.cs" />
-    <Compile Include="ImageSaver.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Modules\ImageUploadModule.cs" />

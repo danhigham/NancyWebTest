@@ -66,7 +66,7 @@ namespace NancyWebTest
                 s.Flush();
                 s.Position = 0;
                 var kernel = new StandardKernel(new NinjectModule());
-                kernel.Get<ImageSaver>().Save(newFile, s);
+                kernel.Get<IImageStore>().Save(newFile, s);
             }
         }
     }
