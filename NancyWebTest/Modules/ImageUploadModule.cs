@@ -22,9 +22,7 @@ namespace NancyWebTest
                 Stopwatch sw = Stopwatch.StartNew();
                 foreach (var file in Request.Files)
                 {
-                    var imgPath = "temp-resized.png";
-
-                    ResizeImage(file.Value, imgPath, 300, 200, true);
+                    ResizeImage(file.Value, file.Name, 300, 200, true);
                 }
                 sw.Stop();
 
@@ -68,7 +66,7 @@ namespace NancyWebTest
                 s.Flush();
                 s.Position = 0;
                 var kernel = new StandardKernel(new NinjectModule());
-                kernel.Get<IImageStore>().Save(newFile, s);
+                kernel.Get<IImageStore>().Save(newFile, s, "string/png");
             }
         }
     }
