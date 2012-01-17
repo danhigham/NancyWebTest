@@ -39,9 +39,15 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureStore.cs" />
+    <Compile Include="FileSystemStore.cs" />
+    <Compile Include="IImageStore.cs" />
+    <Compile Include="ImageSaver.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Modules\ImageUploadModule.cs" />
+    <Compile Include="NinjectModule.cs" />
+    <Compile Include="S3Store.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -61,6 +67,10 @@
     <ProjectReference Include="..\Nancy.Hosting.Self\Nancy.Hosting.Self.csproj">
       <Project>{AA7F66EB-EC2C-47DE-855F-30B3E6EF2134}</Project>
       <Name>Nancy.Hosting.Self</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ninject\Ninject.csproj">
+      <Project>{ADF369E2-6B9E-4D56-9B82-D273AE41EC2D}</Project>
+      <Name>Ninject</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

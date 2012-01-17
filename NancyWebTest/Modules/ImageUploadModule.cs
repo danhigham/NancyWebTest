@@ -1,12 +1,14 @@
 using System;
-using System.Drawing.Imaging;
 using System.IO;
 using Nancy;
+using Ninject;
 
 namespace NancyWebTest
 {
     public class ImageUploadModule : NancyModule
     {
+        public IImageStore ImageStore { get; set; }
+
         public ImageUploadModule()
         {
             Get["/"] = parameters =>
@@ -28,7 +30,7 @@ namespace NancyWebTest
             };
         }
 
-        public void ResizeImage(Stream original, string NewFile, int NewWidth, int MaxHeight, bool OnlyResizeIfWider)
+        public void ResizeImage(Stream original, string newFile, int newWidth, int maxHeight, bool onlyResizeIfWider)
         {
             System.Drawing.Image FullsizeImage = System.Drawing.Image.FromStream(original);
 
@@ -36,29 +38,36 @@ namespace NancyWebTest
             FullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
             FullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
 
-            if (OnlyResizeIfWider)
+            if (onlyResizeIfWider)
             {
-                if (FullsizeImage.Width <= NewWidth)
+                if (FullsizeImage.Width <= newWidth)
                 {
-                    NewWidth = FullsizeImage.Width;
+                    newWidth = FullsizeImage.Width;
                 }
             }
 
-            int NewHeight = FullsizeImage.Height * NewWidth / FullsizeImage.Width;
-            if (NewHeight > MaxHeight)
+            int NewHeight = FullsizeImage.Height * newWidth / FullsizeImage.Width;
+            if (NewHeight > maxHeight)
             {
                 // Resize with height instead
-                NewWidth = FullsizeImage.Width * MaxHeight / FullsizeImage.Height;
-                NewHeight = MaxHeight;
+                newWidth = FullsizeImage.Width * maxHeight / FullsizeImage.Height;
+                NewHeight = maxHeight;
             }
 
-            System.Drawing.Image NewImage = FullsizeImage.GetThumbnailImage(NewWidth, NewHeight, null, IntPtr.Zero);
+            var NewImage = FullsizeImage.GetThumbnailImage(newWidth, NewHeight, null, IntPtr.Zero);
 
             // Clear handle to original file so that we can overwrite it if necessary
             FullsizeImage.Dispose();
 
             // Save resized picture
-            NewImage.Save(NewFile, ImageFormat.Png);
+            using (Stream s = new MemoryStream())
+            {
+                NewImage.Save(s, System.Drawing.Imaging.ImageFormat.Png);
+                s.Flush();
+                s.Position = 0;
+                var kernel = new StandardKernel(new NinjectModule());
+                kernel.Get<ImageSaver>().Save(newFile, s);
+            }
         }
     }
 }
